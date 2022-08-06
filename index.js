@@ -73,13 +73,16 @@ class Main {
   renderElement() {
     console.log('render');
     const textarea = document.createElement('textarea');
+    const br = document.createElement('br');
     textarea.setAttribute('id', 'json-data');
     const button = document.createElement('button');
+    button.textContent = 'Convert';
+    button.classList.add('converter-btn');
     button.addEventListener('click', (e) => {
       console.log('convert', e);
       const jsonDataEle = document.getElementById('json-data');
       const jsonData = jsonDataEle.value;
-      console.log('convert', jsonData);
+      console.log('convert ', jsonData);
       const table = new JsonToTable(jsonData).convert();
       console.log(table);
       const output = document.getElementById('output');
@@ -87,9 +90,10 @@ class Main {
     });
     const output = document.createElement('div');
     output.setAttribute('id', 'output');
-    document.body.append(output);
     document.body.append(textarea);
+    document.body.append(br);
     document.body.append(button);
+    document.body.append(output);
   }
 }
 
