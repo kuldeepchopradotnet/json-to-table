@@ -67,7 +67,9 @@ class JsonToTable {
 
 class Main {
   constructor() {
-    this.renderElement();
+    setTimeout(() => {
+      this.renderElement();
+    }, 1e3);
   }
 
   renderElement() {
