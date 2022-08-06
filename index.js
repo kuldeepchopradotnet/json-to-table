@@ -55,6 +55,9 @@ class JsonToTable {
         jsonData = data;
       }
       if (jsonData) {
+        if (!Array.isArray(jsonData)) {
+          jsonData = [jsonData];
+        }
         return jsonData;
       } else {
         throw 'invalid data';
@@ -84,11 +87,16 @@ class Main {
       console.log('convert', e);
       const jsonDataEle = document.getElementById('json-data');
       const jsonData = jsonDataEle.value;
+      if (!jsonData) return;
       console.log('convert ', jsonData);
-      const table = new JsonToTable(jsonData).convert();
-      console.log(table);
-      const output = document.getElementById('output');
-      output.innerHTML = table;
+      try {
+        const table = new JsonToTable(jsonData).convert();
+        console.log(table);
+        const output = document.getElementById('output');
+        output.innerHTML = table;
+      } catch (e) {
+        alert('Invalid Json');
+      }
     });
     const output = document.createElement('div');
     output.setAttribute('id', 'output');
