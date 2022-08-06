@@ -66,35 +66,30 @@ class JsonToTable {
 }
 
 class Main {
-  appEle = document.getElementById('app');
-
   constructor() {
-    const testData = [
-      {
-        id: '1',
-        name: 'kuldeep',
-        phone: '98098',
-      },
-      {
-        id: '2',
-        email: 'jhon@gmail.com',
-        name: 'jhon',
-      },
-      {
-        id: '3',
-        email: 'bruce@gmail.com',
-        name: 'bruce',
-        phone: '98098',
-      },
-      {
-        id: '4',
-        email: 'peter@gmail.com',
-        name: 'peter',
-      },
-    ];
-    const table = new JsonToTable(testData).convert();
-    console.log(table);
-    this.appEle.innerHTML = table; //JSON.stringify(table);
+    this.renderElement();
+  }
+
+  renderElement() {
+    console.log('render');
+    const textarea = document.createElement('textarea');
+    textarea.setAttribute('id', 'json-data');
+    const button = document.createElement('button');
+    button.addEventListener('click', (e) => {
+      console.log('convert', e);
+      const jsonDataEle = document.getElementById('json-data');
+      const jsonData = jsonDataEle.value;
+      console.log('convert', jsonData);
+      const table = new JsonToTable(jsonData).convert();
+      console.log(table);
+      const output = document.getElementById('output');
+      output.innerHTML = table;
+    });
+    const output = document.createElement('div');
+    output.setAttribute('id', 'output');
+    document.body.append(output);
+    document.body.append(textarea);
+    document.body.append(button);
   }
 }
 
